@@ -1,0 +1,117 @@
+@use "./variables" as v;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  background: transparent;
+  list-style: none;
+}
+body {
+  background: rgb(5, 35, 52);
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+strong {
+  font-weight: 700;
+}
+
+
+li, p {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.16px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+
+  @media (max-width: 1184px) {
+    padding: 0 2rem;
+  }
+}
+
+
+.object__fit__cover {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: 400;
+  line-height: 1.2;
+
+  @media (min-width: v.$breakpoint-desktop) {
+    font-size: calc((38 / 1440) * 100vw);
+  }
+}
+
+.btn{
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 12px;
+  background: transparent;
+  padding: 16px 33px;
+  font-size: 1.0625rem;
+
+  @media (max-width: v.$breakpoint-mobile) {
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: v.$breakpoint-desktop) {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+.btnPrimaryLink {
+  border-color: v.$red-color;
+  color: v.$white-color;
+  background: v.$red-color;
+
+  &:hover {
+    border-color: rgba(25,21,58,0.2);
+    color: #f93821;
+    background: rgba(255,255,255,0.5);
+  }
+}
+
+
+.globalLink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  .u-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    border: 0;
+  }
+}
