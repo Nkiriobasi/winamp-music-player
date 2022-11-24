@@ -52,35 +52,35 @@ const Home = () => {
 
             <ul>
               <li>
-                <Link to='/music-player' className="menu__item-link">
+                <Link to='/' className="menu__item-link">
                   <span className="icon"><TbHome /></span>
                   <span className="item">Home</span>
                 </Link>
               </li>
 
               <li>
-                <Link to='/music-player/albums' className="menu__item-link">
+                <Link to='/albums' className="menu__item-link">
                   <span className="icon"><MdOutlineAlbum /></span>
                   <span className="item">Albums</span>
                 </Link>
               </li>
 
               <li>
-                <Link to='/music-player/artists' className="menu__item-link">
+                <Link to='/artists' className="menu__item-link">
                   <span className="icon"><TbHeadphones /></span>
                   <span className="item">Artists</span>
                 </Link>
               </li>
 
               <li>
-                <Link to='/music-player/downloaded' className="menu__item-link">
+                <Link to='/downloaded' className="menu__item-link">
                   <span className="icon"><AiOutlineCloudDownload /></span>
                   <span className="item">Downloaded</span>
                 </Link>
               </li>
 
               <li>
-                <Link to='/music-player/trending' className="menu__item-link">
+                <Link to='/trending' className="menu__item-link">
                   <span className="icon"><MdMusicNote /></span>
                   <span className="item">Trending</span>
                 </Link>
