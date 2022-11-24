@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/global.scss';
-import { Error, MusicPlayer } from './pages'
+import { Error, Home } from './pages'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
 const router = createBrowserRouter([
   {
-    path: "/music-player",
-    element: <MusicPlayer />,
+    path: "/",
+    element: <Home />,
     errorElement: <Error />,
   }
 ]);

@@ -8,7 +8,7 @@ import { AiOutlineCloudDownload, AiOutlineSearch } from 'react-icons/ai'
 import { HiPlusCircle } from 'react-icons/hi'
 
 
-const MusicPlayer = () => {
+const Home = () => {
 
   const CLIENT_ID = "af601f7b315e470c9e44a971eb5ee5e5"
   const REDIRECT_URI = "http://localhost:3000"
@@ -145,4 +145,4 @@ const MusicPlayer = () => {
   )
 }
 
-export default MusicPlayer
+export default Home
