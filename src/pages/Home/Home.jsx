@@ -1,26 +1,32 @@
 import React, {useEffect, useState} from 'react'
-import '../../styles/musicPlayer.scss'
+import axios from 'axios'
+import '../../styles/home.scss'
 import { Images } from '../../static'
 import { Link } from 'react-router-dom'
 import { TbHome, TbHeadphones } from 'react-icons/tb'
-import { MdOutlineAlbum, MdMusicNote, MdQueueMusic } from 'react-icons/md'
-import { AiOutlineCloudDownload, AiOutlineSearch } from 'react-icons/ai'
+import { MdOutlineAlbum, MdQueueMusic } from 'react-icons/md'
+import { AiOutlineSearch } from 'react-icons/ai'
 import { HiPlusCircle } from 'react-icons/hi'
+import { RenderArtists } from '../../components'
 
 
 const Home = () => {
+  const [searchKey, setSearchKey] = useState("")
+  const [artists, setArtists] = useState([])
+
+  const [token, setToken] = useState("");
+
 
   const CLIENT_ID = "af601f7b315e470c9e44a971eb5ee5e5"
   const REDIRECT_URI = "http://localhost:3000"
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
   const RESPONSE_TYPE = "token"
 
-  const [token, setToken] = useState("");
-
   useEffect(() => {
     const hash = window.location.hash
     let token = window.localStorage.getItem("token")
     
+    // If statement to check and set the access token returned from authentication
     if (!token && hash) {
       token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
     
@@ -29,15 +35,43 @@ const Home = () => {
     }
     
     setToken(token)
-    
   }, [])
 
-
+  
+  // logout function, when logging out set the token setter function to empty string, and remove the token variable stored in localStorage
   const logout = () => {
     setToken("")
     window.localStorage.removeItem("token")
   }
 
+  const searchArtists = async (e) => {
+    e.preventDefault()
+    const {data} = await axios.get("https://api.spotify.com/v1/search", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        q: searchKey,
+        type: "artist"
+      }
+    })
+
+    setArtists(data.artists.items)
+  }
+
+
+  // Execute a function when the user presses a key on the keyboard
+  const handleKeyPress = (event) => {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "enter") {
+      // Cancel the default action, if needed
+      event.preventDefault()
+      // Trigger the button element with a click
+      searchArtists()
+    }
+  }
+
+  
   return (
     <React.Fragment>
       <aside>
@@ -69,20 +103,6 @@ const Home = () => {
                 <Link to='/artists' className="menu__item-link">
                   <span className="icon"><TbHeadphones /></span>
                   <span className="item">Artists</span>
-                </Link>
-              </li>
-
-              <li>
-                <Link to='/downloaded' className="menu__item-link">
-                  <span className="icon"><AiOutlineCloudDownload /></span>
-                  <span className="item">Downloaded</span>
-                </Link>
-              </li>
-
-              <li>
-                <Link to='/trending' className="menu__item-link">
-                  <span className="icon"><MdMusicNote /></span>
-                  <span className="item">Trending</span>
                 </Link>
               </li>
             </ul>
@@ -124,10 +144,11 @@ const Home = () => {
       <div className='home__player'>
         <div className="top__wrapper">
           <div className="top__left">
-            <div className="input__container">
-              <input type="text" placeholder="Search" />
+            <form className="input__container" onSubmit={searchArtists} onKeyDown={handleKeyPress}>
+              <input type="text" placeholder="What do you want to listern to?" onChange={e => setSearchKey(e.target.value)} />
               <AiOutlineSearch className='search__icon' />
-            </div>
+              {/* <button type={"submit"}>Search</button> */}
+            </form>
           </div>
           
           <div className="top__right">
@@ -140,6 +161,8 @@ const Home = () => {
             }
           </div>
         </div>
+
+        <RenderArtists artists={artists} />
       </div>
     </React.Fragment>
   )

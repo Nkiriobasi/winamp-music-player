@@ -119,11 +119,11 @@ aside {
         gap: 2rem;
 
         .top__left {
-            width: 40%;
+            width: 45%;
         }
 
         .top__right {
-            width: 60%;
+            width: 55%;
             display: flex;
             justify-content: flex-end;
 
@@ -148,7 +148,7 @@ aside {
 
         input {
             height: 100%;
-            width: 100%;
+            width: 80%;
             padding-left: 35px;
             margin: 0;
             color: v.$white-color;
@@ -171,5 +171,22 @@ aside {
             width: 18px;
             height: 18px;
         }
+
+        // button {
+        //     display: inline-block;
+        //     background: v.$red-color;
+        //     border-radius: 20px;
+        //     position: absolute;
+        //     bottom: 4px;
+        //     right: 7px;
+        //     cursor: pointer;
+        //     padding: 0.25rem 0.875rem;
+        //     color: v.$white-color;
+            
+        //     &:hover {
+        //         color: #f93821;
+        //         background: rgba(255,255,255,0.5);
+        //     }
+        // }
     }
 }
