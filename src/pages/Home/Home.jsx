@@ -7,14 +7,14 @@ import { TbHome, TbHeadphones } from 'react-icons/tb'
 import { MdOutlineAlbum, MdQueueMusic } from 'react-icons/md'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { HiPlusCircle } from 'react-icons/hi'
-import { RenderArtists } from '../../components'
+import { RenderArtists, UserProfile } from '../../components'
 
 
 const Home = () => {
   const [searchKey, setSearchKey] = useState("")
   const [artists, setArtists] = useState([])
-
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState("")
+  const [profile, setProfile] = useState({})
 
 
   const CLIENT_ID = "af601f7b315e470c9e44a971eb5ee5e5"
@@ -35,18 +35,34 @@ const Home = () => {
     }
     
     setToken(token)
+
+    // const handleUserProfile = async () => {
+    //   const {profileData} = await axios.get("https://api.spotify.com/v1/me", {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     },
+    //     params: {
+    //       type: "user"
+    //     }
+    //   })
+  
+    //   setProfile(profileData);
+    // }
+  
+    // handleUserProfile()
   }, [])
 
   
   // logout function, when logging out set the token setter function to empty string, and remove the token variable stored in localStorage
-  const logout = () => {
+  const handleLogout = () => {
     setToken("")
     window.localStorage.removeItem("token")
   }
+  
 
   const searchArtists = async (e) => {
     e.preventDefault()
-    const {data} = await axios.get("https://api.spotify.com/v1/search", {
+    const {artistsData} = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`
       },
@@ -56,7 +72,7 @@ const Home = () => {
       }
     })
 
-    setArtists(data.artists.items)
+    setArtists(artistsData.artists.items);
   }
 
 
@@ -147,7 +163,7 @@ const Home = () => {
             <form className="input__container" onSubmit={searchArtists} onKeyDown={handleKeyPress}>
               <input type="text" placeholder="What do you want to listern to?" onChange={e => setSearchKey(e.target.value)} />
               <AiOutlineSearch className='search__icon' />
-              {/* <button type={"submit"}>Search</button> */}
+              <button type={"submit"}>Search</button>
             </form>
           </div>
           
@@ -157,7 +173,9 @@ const Home = () => {
                 className='btn btnPrimaryLink'
               >
                 Login to Spotify
-              </a> : <button onClick={logout} className='btn btnPrimaryLink'>Logout</button>
+              </a> : 
+              // <UserProfile handleLogout={handleLogout} profile={profile} />
+              <button onClick={handleLogout} className='btn btnPrimaryLink'>Logout</button>
             }
           </div>
         </div>

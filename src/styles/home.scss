@@ -172,21 +172,21 @@ aside {
             height: 18px;
         }
 
-        // button {
-        //     display: inline-block;
-        //     background: v.$red-color;
-        //     border-radius: 20px;
-        //     position: absolute;
-        //     bottom: 4px;
-        //     right: 7px;
-        //     cursor: pointer;
-        //     padding: 0.25rem 0.875rem;
-        //     color: v.$white-color;
+        button {
+            display: inline-block;
+            background: v.$red-color;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 4px;
+            right: 7px;
+            cursor: pointer;
+            padding: 0.25rem 0.875rem;
+            color: v.$white-color;
             
-        //     &:hover {
-        //         color: #f93821;
-        //         background: rgba(255,255,255,0.5);
-        //     }
-        // }
+            &:hover {
+                color: #f93821;
+                background: rgba(255,255,255,0.5);
+            }
+        }
     }
 }
