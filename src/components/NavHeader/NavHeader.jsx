@@ -5,7 +5,7 @@ import { UserProfile } from '../../components'
 import apiClient from '../../spotify'
 
 
-const NavHeader = ({ handleKeyPress, searchArtists, handleLogout, token, setSearchKey }) => {
+const NavHeader = ({ handleKeyPress, searchArtists, handleLogout, setSearchKey }) => {
   const [userProfile, setUserProfile] = useState({})
 
 
