@@ -5,64 +5,46 @@ import { Images } from '../../static'
 import { Link } from 'react-router-dom'
 import { TbHome, TbHeadphones } from 'react-icons/tb'
 import { MdOutlineAlbum, MdQueueMusic } from 'react-icons/md'
-import { AiOutlineSearch } from 'react-icons/ai'
 import { HiPlusCircle } from 'react-icons/hi'
-import { RenderArtists, UserProfile } from '../../components'
+import { NavHeader, RenderArtists } from '../../components'
+import Login from '../auth/Login'
+import { setClientToken } from '../../spotify'
 
 
 const Home = () => {
-  const [searchKey, setSearchKey] = useState("")
-  const [artists, setArtists] = useState([])
-  const [token, setToken] = useState("")
-  const [profile, setProfile] = useState({})
+  const [searchKey, setSearchKey] = useState("");
+  const [artists, setArtists] = useState([]);
+  const [token, setToken] = useState("");
 
-
-  const CLIENT_ID = "af601f7b315e470c9e44a971eb5ee5e5"
-  const REDIRECT_URI = "http://localhost:3000"
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
-  const RESPONSE_TYPE = "token"
 
   useEffect(() => {
-    const hash = window.location.hash
-    let token = window.localStorage.getItem("token")
-    
-    // If statement to check and set the access token returned from authentication
-    if (!token && hash) {
-      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-    
-      window.location.hash = ""
-      window.localStorage.setItem("token", token)
-    }
-    
-    setToken(token)
+    const token = window.localStorage.getItem("token");
+    const hash = window.location.hash;
+    window.location.hash = "";
 
-    // const handleUserProfile = async () => {
-    //   const {profileData} = await axios.get("https://api.spotify.com/v1/me", {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     },
-    //     params: {
-    //       type: "user"
-    //     }
-    //   })
-  
-    //   setProfile(profileData);
-    // }
-  
-    // handleUserProfile()
+    if ( !token && hash ){
+      let _token = hash.split("&")[0].split("=")[1];
+      window.localStorage.setItem("token", _token);
+      setToken(_token);
+      setClientToken(_token);
+    } else {
+      setToken(token);
+      setClientToken(token);
+    }
   }, [])
 
   
-  // logout function, when logging out set the token setter function to empty string, and remove the token variable stored in localStorage
   const handleLogout = () => {
-    setToken("")
-    window.localStorage.removeItem("token")
+    // before logging out set token state to empty string
+    setToken("");
+    // also remove the token stored in local-storage
+    window.localStorage.removeItem("token");
   }
   
 
   const searchArtists = async (e) => {
-    e.preventDefault()
-    const {artistsData} = await axios.get("https://api.spotify.com/v1/search", {
+    e.preventDefault();
+    const {data} = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`
       },
@@ -72,7 +54,7 @@ const Home = () => {
       }
     })
 
-    setArtists(artistsData.artists.items);
+    setArtists(data.artists.items);
   }
 
 
@@ -81,14 +63,16 @@ const Home = () => {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "enter") {
       // Cancel the default action, if needed
-      event.preventDefault()
+      event.preventDefault();
       // Trigger the button element with a click
-      searchArtists()
+      searchArtists();
     }
   }
 
   
-  return (
+  return !token ? (
+    <Login />
+  ) : (
     <React.Fragment>
       <aside>
         <div className="wrapper">
@@ -158,29 +142,17 @@ const Home = () => {
       </aside>
 
       <div className='home__player'>
-        <div className="top__wrapper">
-          <div className="top__left">
-            <form className="input__container" onSubmit={searchArtists} onKeyDown={handleKeyPress}>
-              <input type="text" placeholder="What do you want to listern to?" onChange={e => setSearchKey(e.target.value)} />
-              <AiOutlineSearch className='search__icon' />
-              <button type={"submit"}>Search</button>
-            </form>
-          </div>
-          
-          <div className="top__right">
-            {!token ? 
-              <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`} 
-                className='btn btnPrimaryLink'
-              >
-                Login to Spotify
-              </a> : 
-              // <UserProfile handleLogout={handleLogout} profile={profile} />
-              <button onClick={handleLogout} className='btn btnPrimaryLink'>Logout</button>
-            }
-          </div>
-        </div>
+        <NavHeader 
+          handleKeyPress={handleKeyPress} 
+          searchArtists={searchArtists} 
+          handleLogout={handleLogout} 
+          token={token}
+          setSearchKey={setSearchKey}
+        />
 
-        <RenderArtists artists={artists} />
+        <RenderArtists 
+          artists={artists} 
+        />
       </div>
     </React.Fragment>
   )
