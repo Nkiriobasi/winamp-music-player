@@ -1,20 +1,21 @@
 import React, { useState} from 'react'
 import './UserProfile.scss'
-// import { CgProfile } from 'react-icons'
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md'
 
 
-const UserProfile = ({handleLogout, userProfile}) => {
+const UserProfile = ({handleLogout, image, displayName}) => {
   const [isActive, setActive] = useState("false");
 
   const handleToggle = () => {
     setActive(!isActive);
   };
 
+
+
   return (
     <div className="user__profile" onClick={handleToggle} onBlur={handleToggle}>
-      <img src={userProfile.images[0].url} alt="profile" className='user__proile-img' />
-      <h4 className="user__profile-name">{userProfile.display_name}</h4>
+      <img src={image} alt="profile" className='user__proile-img' />
+      <h4 className="user__profile-name">{displayName}</h4>
       {isActive ? <MdArrowDropDown className="arrowDown" /> : <MdArrowDropUp className="arrowDown" />}
 
       <div className={`user__profile-dropdown ${isActive ? "hide" : "show"}`}>
