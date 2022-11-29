@@ -7,7 +7,7 @@ import { TbHome, TbHeadphones } from 'react-icons/tb'
 import { MdOutlineAlbum, MdQueueMusic } from 'react-icons/md'
 import { HiPlusCircle } from 'react-icons/hi'
 import { NavHeader, RenderArtists } from '../../components'
-import Login from '../auth/Login'
+import { Login } from '../../pages'
 import { setClientToken } from '../../spotify'
 
 
