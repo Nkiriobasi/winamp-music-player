@@ -69,14 +69,5 @@
         width: 55%;
         display: flex;
         justify-content: flex-end;
-
-        .btn{
-            font-size: 0.875rem;
-          
-            @media (max-width: v.$breakpoint-desktop) {
-              width: unset;
-              text-align: unset;
-            }
-          }
     }
 }

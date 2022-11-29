@@ -6,12 +6,18 @@ import apiClient from '../../spotify'
 
 
 const NavHeader = ({ handleKeyPress, searchArtists, handleLogout, setSearchKey }) => {
-  const [userProfile, setUserProfile] = useState({})
+  const [image, setImage] = useState(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXnq6DDj1lWX6YTLN5kvm2ylrKNRMUV-PI9bv53WtZGcewKImhLRDAqtvbKnf5ehBDWto&usqp=CAU"
+  );
+  const [displayName, setDisplayName] = useState("User");
 
 
   useEffect(() => {
     apiClient.get("me").then(response => {
-      setUserProfile(response.data);
+      const userData = response.data;
+
+      setImage(userData.images[0].url);
+      setDisplayName(userData.display_name);
     })
   }, [])
 
@@ -28,7 +34,7 @@ const NavHeader = ({ handleKeyPress, searchArtists, handleLogout, setSearchKey }
       </div>
           
       <div className="top__right">
-        <UserProfile handleLogout={handleLogout} userProfile={userProfile} />
+        <UserProfile handleLogout={handleLogout} image={image} displayName={displayName} />
       </div>
     </div>
   )
