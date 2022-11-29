@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { TbHome, TbHeadphones } from 'react-icons/tb'
 import { MdOutlineAlbum, MdQueueMusic } from 'react-icons/md'
 import { HiPlusCircle } from 'react-icons/hi'
-import { NavHeader, RenderArtists } from '../../components'
+import { NavHeader, PlayBack, RenderArtists } from '../../components'
 import { Login } from '../../pages'
 import { setClientToken } from '../../spotify'
 
@@ -154,6 +154,8 @@ const Home = () => {
           artists={artists} 
         />
       </div>
+
+      <PlayBack />
     </React.Fragment>
   )
 }
