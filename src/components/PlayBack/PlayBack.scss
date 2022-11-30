@@ -1,11 +1,116 @@
-
+@use '../../styles/variables' as v;
 
 .playback {
     width: 100%;
-    height: 400px;
+    height: 100px;
     position: fixed;
     bottom: 0;
     left: 0;
-    background: red;
+    right: 0;
+    background: rgb(3, 25, 38);
     z-index: 2;
+    opacity: 1;
+    box-shadow: 2px 4px 6px -1px rgb(0 0 0 / 0.1), 2px 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    .playback__wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+
+        .playback__control {
+            width: 33.333333%;
+
+            .control__top {
+                width: 100%;
+                height: 34px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // border: 2px solid blue;
+
+                .tooltip {
+                    width: auto;
+                    height: 100%;
+                    position: relative;
+                    display: inline-block;
+
+                    .shuffle__control, .previous__control, .play__control, .next__control, .repeat__control {
+                        width: inherit;
+                        height: inherit;
+                        display: inherit;
+    
+                        .shuffle, .previous, .next, .repeat {
+                            color: rgb(182, 179, 179);
+                            font-size: 25px;
+                            height: 100%;
+    
+                            &:hover {
+                                color: v.$white-color;
+                            }
+                        }
+                    }
+
+                    .tooltiptext {
+                        visibility: hidden;
+                        width: auto;
+                        background-color: v.$white-color;
+                        color: black;
+                        text-align: center;
+                        border-radius: 6px;
+                        font-size: 0.75rem;
+                        padding: 5px;
+                        display: inline-block;
+
+                        position: absolute;
+                        z-index: 1;
+                        bottom: 125%;
+                        left: 50%;
+                        margin-left: -30px;
+                        transition: opacity 0.3s;
+                        opacity: 0;
+                    }
+
+                    .tooltiptext__lg {
+                        width: 90px;
+                    }
+                }
+
+                .tooltip:hover .tooltiptext {
+                    opacity: 1;
+                    visibility: visible;
+                  }
+
+
+                .tooltip:not(:last-child) {
+                    margin-right: 15px;
+                }
+
+                .tooltip:nth-child(3) {
+                    width: 30px;
+                    height: 30px;
+                    background: v.$white-color;
+                    border-radius: 50%;
+
+                    &:hover {
+                        background: rgb(182, 179, 179);
+                    }
+
+                    .play__control {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .play, .pause {
+                        color: black;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
 }
