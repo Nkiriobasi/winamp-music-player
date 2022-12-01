@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/global.scss';
-import { Error, Home, Login } from './pages'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Error, Root, Library } from './pages'
+import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from "react-router-dom";
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <Error />,
-  },
-  {
-    path: "login",
-    element: <Login />
-  }
-]);
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />} errorElement={<Error />}>
+      <Route path="library" element={<Library />} />
+    </Route>
+  )
+);
 
 
 
