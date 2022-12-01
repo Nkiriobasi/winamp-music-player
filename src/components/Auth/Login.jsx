@@ -1,6 +1,6 @@
 import React from 'react'
 import { loginEndpoint } from '../../spotify'
-import '../../styles/login.scss'
+import './Login.scss'
 
 
 const Login = () => {
