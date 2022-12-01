@@ -1,12 +1,14 @@
 import React from 'react'
 import './PlayBack.scss'
 import { MdSkipNext, MdSkipPrevious } from 'react-icons/md'
-import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
+import { BsFillPlayFill } from 'react-icons/bs'
 import { BiShuffle } from 'react-icons/bi'
 import { CiRepeat } from 'react-icons/ci'
 
+// BsPauseFill
 
 const PlayBack = () => {
+
   return (
     <section className='playback'>
         <div className="playback__wrapper">
