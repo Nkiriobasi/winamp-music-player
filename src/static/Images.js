@@ -1,7 +1,7 @@
 
 import WinampRedLogo from '../assets/winamp-red-logo.png'
 import DefaultImg from '../assets/default-img.jpg'
-import SpotifyLogoWhite from '../assets/Spotify_Logo_RGB_White.png'
+import spotifyLogo from '../assets/spotifyLogo.png'
 
 
 
@@ -9,5 +9,5 @@ import SpotifyLogoWhite from '../assets/Spotify_Logo_RGB_White.png'
 export default {
     WinampRedLogo,
     DefaultImg,
-    SpotifyLogoWhite
+    spotifyLogo
 }
