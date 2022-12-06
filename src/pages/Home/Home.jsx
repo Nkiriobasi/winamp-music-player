@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import '../../styles/home.scss'
 import { Images } from '../../static'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import { TbHome, TbHeadphones } from 'react-icons/tb'
 import { MdOutlineAlbum, MdQueueMusic, MdLibraryMusic } from 'react-icons/md'
 import { HiPlusCircle } from 'react-icons/hi'
 import { NavHeader, PlayBack, RenderArtists, Login } from '../../components'
 import { setClientToken } from '../../spotify'
+// import apiClient from '../../spotify'
 
 
-const Root = () => {
+const Home = () => {
   const [searchKey, setSearchKey] = useState("");
   const [artists, setArtists] = useState([]);
   const [token, setToken] = useState("");
@@ -30,6 +31,7 @@ const Root = () => {
       setToken(token);
       setClientToken(token);
     }
+
   }, [])
 
   
@@ -68,6 +70,11 @@ const Root = () => {
     }
   }
 
+  let activeStyle = {
+    borderRight: "2px solid rgb(34 211 238)",
+    color: "white"
+  };
+
   
   return !token ? (
     <Login />
@@ -85,31 +92,31 @@ const Root = () => {
 
             <ul>
               <li>
-                <Link to='/' className="menu__item-link">
+                <NavLink to='/' className="menu__item-link" style={({ isActive }) => isActive ? activeStyle : undefined }>
                   <span className="icon"><TbHome /></span>
                   <span className="item">Home</span>
-                </Link>
+                </NavLink>
               </li>
 
               <li>
-                <Link to='/albums' className="menu__item-link">
+                <NavLink to='/albums' className="menu__item-link" style={({ isActive }) => isActive ? activeStyle : undefined }>
                   <span className="icon"><MdOutlineAlbum /></span>
                   <span className="item">Albums</span>
-                </Link>
+                </NavLink>
               </li>
 
               <li>
-                <Link to='/artists' className="menu__item-link">
+                <NavLink to='/artists' className="menu__item-link" style={({ isActive }) => isActive ? activeStyle : undefined }>
                   <span className="icon"><TbHeadphones /></span>
                   <span className="item">Artists</span>
-                </Link>
+                </NavLink>
               </li>
 
               <li>
-                <Link to='/library' className="menu__item-link">
+                <NavLink to='/library' className="menu__item-link" style={({ isActive }) => isActive ? activeStyle : undefined }>
                   <span className="icon"><MdLibraryMusic /></span>
                   <span className="item">Library</span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -159,6 +166,8 @@ const Root = () => {
         <RenderArtists 
           artists={artists} 
         />
+
+        <Outlet />
       </div>
 
       <PlayBack />
@@ -166,4 +175,4 @@ const Root = () => {
   )
 }
 
-export default Root
+export default Home
