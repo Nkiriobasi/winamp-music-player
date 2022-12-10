@@ -30,6 +30,22 @@
         pointer-events: none;
     }
 
+    .name__tooltip {
+        position: absolute;
+        bottom: 80%;
+        left: 30%;
+        background-color: black;
+        color: v.$white-color;
+        font-size: 0.75rem;
+        padding: 5px;
+        transition: opacity 0.3s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1;
+        text-align: center;
+        border-radius: 6px;
+    }
+
     .arrowDown {
         font-size: 30px;
     }
@@ -55,22 +71,15 @@
             font-size: 0.875rem;
             font-weight: 500;
             color: v.$p-text-color;
-            // border: 1px solid blue;
 
             &:hover {
                 background: rgb(204, 203, 203);
             }
         }
 
-        .user__profile-pro {
-            pointer-events: none;
-            cursor: not-allowed;
-            padding-bottom: 1rem;
-        }
 
         .user__profile-log {
             cursor: pointer;
-            margin-top: 0.25rem;
             border-radius: 25px;
         }
     }
@@ -86,4 +95,9 @@
         visibility: hidden;
         pointer-events: none;
     }
+}
+
+.user__profile:hover .name__tooltip {
+    opacity: 1;
+    visibility: visible;
 }

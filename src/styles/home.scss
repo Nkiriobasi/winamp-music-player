@@ -63,7 +63,7 @@ aside {
                         display: flex;
                         align-items: center;
         
-                        &:hover, &:active {
+                        &:hover {
                             border-right: 2px solid v.$cyan-color;
                             color: v.$white-color;
                         }
